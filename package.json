@@ -1,0 +1,14 @@
+{
+  "name": "block-letter-generator",
+  "version": "1.0.0",
+  "description": "Generate block letters",
+  "repository": "drewthoennes/block-letter-generator",
+  "author": {
+    "name": "Drew Thoennes",
+    "email": "dthoenne@purdue.edu"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "replace-at": "^1.0.0"
+  }
+}
