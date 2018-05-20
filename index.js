@@ -1,38 +1,4 @@
-// Letters are 4 x 7
-const letters = {
-  a: [
-    "  __ _ ",
-    " / _' |",
-    "| (_| |",
-    " \\__,_|",
-  ],
-  b: [
-    "| |    ",
-    "| |,__ ",
-    "|  __ \\",
-    "|_,___/"
-  ],
-  c: [
-    "  ____ ",
-    " / ___\\",
-    "| (____",
-    " \\____/",
-  ],
-  e: [
-    "  ____ ",
-    " / __ \\",
-    "|  ___/",
-    " \\____/",
-  ]
-  /*
-  *: [
-    "       ",
-    "       ",
-    "       ",
-    "       "
-  ],
-  */
-}
+const defaultFont = require('./fonts/default');
 const delimiter = '\n'
 
 module.exports = function(string) {
@@ -44,7 +10,8 @@ module.exports = function(string) {
     output = ["", "", "", "", ""]
 
     for (let i = 0, letter = fragment[i]; i < fragment.length; i++, letter = fragment[i]) {
-      for (let j = 0, line = letters[letter][j]; j < letters[letter].length; j++, line = letters[letter][j]) {
+      letter = translate(letter);
+      for (let j = 0, line = defaultFont[letter][j]; j < defaultFont[letter].length; j++, line = defaultFont[letter][j]) {
         output[j] += line;
       }
     }
@@ -57,5 +24,20 @@ module.exports = function(string) {
 function print(arr) {
   for (let i = 0, line = arr[i]; i < arr.length; i++, line = arr[i]) {
     console.log(line);
+  }
+}
+
+function translate(letter) {
+  // Catch alphabetic
+  if (letter.match(/^[a-zA-Z]/g)) {
+    return letter;
+  }
+
+  // Find names for non-alphabetic
+  switch(letter) {
+    case ' ':
+      return 'space';
+    default:
+      return 'dne';
   }
 }
