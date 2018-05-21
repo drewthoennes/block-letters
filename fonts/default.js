@@ -156,6 +156,12 @@ module.exports = {
     "/ ____/",
     "\\_____\\"
   ],
+  '!': [
+    "|^|",
+    "| |",
+    "\\_/",
+    "|_|"
+  ],
   space: [
     "   ",
     "   ",
@@ -168,12 +174,6 @@ module.exports = {
     "",
     ""
   ]
-  /*
-  *: [
-    "       ",
-    "       ",
-    "       ",
-    "       "
-  ],
-  */
 }
+module.exports.spacer = "";
+module.exports.height = 4;
