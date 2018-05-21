@@ -96,12 +96,16 @@ function translate(letter, font) {
     return letter.toLowerCase();
   }
 
-  // Find names for non-alphabetic
+  // Find names for non-alphabetic and append symbols as necessay
   switch(letter) {
     case ' ':
       return 'space';
     case '!':
       return font['!'] ? '!' : 'dne';
+    case '?':
+      return font['?'] ? '!' : 'dne';
+    case '-':
+      return font['-'] ? '!' : 'dne';
     default:
       return 'dne';
   }
