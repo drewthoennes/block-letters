@@ -1,12 +1,17 @@
 const defaultFont = require('./fonts/default');
 const delimiter = '\n'
 
-module.exports = function(string) {
+module.exports = function(string, options) {
+  options = Object.assign({
+    delimiter: '\n'
+  }, options);
+
   let output = [];
+  let result = "";
 
   if (typeof(string) !== 'string' || string === null || string === "") return;
 
-  string.split(delimiter).forEach(function(fragment) {
+  string.split(options['delimiter']).forEach(function(fragment) {
     output = ["", "", "", "", ""]
 
     for (let i = 0, letter = fragment[i]; i < fragment.length; i++, letter = fragment[i]) {
@@ -15,10 +20,14 @@ module.exports = function(string) {
         output[j] += line;
       }
     }
-    print(output);
+    result = append(result, output);
   })
 
-  return string;
+  return result;
+}
+
+function valid(arr) {
+  // TODO
 }
 
 function print(arr) {
@@ -27,10 +36,18 @@ function print(arr) {
   }
 }
 
+function append(result, arr) {
+  for (let i = 0, line = arr[i]; i < arr.length; i++, line = arr[i]) {
+    result += line + '\n';
+  }
+  return result;
+}
+
 function translate(letter) {
   // Catch alphabetic
   if (letter.match(/^[a-zA-Z]/g)) {
-    return letter;
+    // Only allow lowercase letters (might change with new fonts)
+    return letter.toLowerCase();
   }
 
   // Find names for non-alphabetic
