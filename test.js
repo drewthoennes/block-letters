@@ -3,6 +3,6 @@ const blockLetterGenerator = require('./index.js');
 
 // console.log('--- Testing ---');
 
-blockLetterGenerator('abcdef');
+blockLetterGenerator('abcdefghijkl\nmnopqrstuvwxyz');
 
 // console.log('--- All test cases passed ---');
