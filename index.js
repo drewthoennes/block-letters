@@ -57,14 +57,20 @@ function valid(font) {
     throw new TypeError('Font Error: Missing `dne` field');
   }
 
-  // Check that every letter has the same height
-  if (font.length === 0) {
+  // Check that every letter has the same height and is an array
+  if (font.height === 0) {
     return true;
   } else {
     let letterHeight = font.height;
-    for (let i = 0, line = font[i]; i < font.length; i++, line = font[i]) {
-      if (line.length !== letterHeight) {
-        throw new TypeError('Font Error: Letters don\'t have the same listed height');
+    for (line in font) {
+      if (line === 'height' || line === 'spacer');
+      else {
+        if (font[line].length !== letterHeight) {
+          throw new TypeError('Font Error: Letters don\'t have the same listed height');
+        }
+        if (!Array.isArray(font[line])) {
+          throw new TypeError('Font Error: Expected letter of type `array` but got `' + typeof(line) + '`');
+        }
       }
     }
   }
@@ -95,18 +101,38 @@ function translate(letter, font) {
     // Only allow lowercase letters (might change with new fonts)
     return letter.toLowerCase();
   }
-
+  let name;
   // Find names for non-alphabetic and append symbols as necessay
   switch(letter) {
     case ' ':
-      return 'space';
+      name = 'space';
+      break;
+    case ',':
+      name = 'comma';
+      break;
+    case '\'':
+      name = 'apostrophe';
+      break;
+    case '.':
+      name = 'period';
+      break;
     case '!':
-      return font['!'] ? '!' : 'dne';
+      name = 'exclamation';
+      break;
     case '?':
-      return font['?'] ? '!' : 'dne';
+      name = 'question';
+      break;
     case '-':
-      return font['-'] ? '!' : 'dne';
+      name = 'dash';
+      break;
     default:
-      return 'dne';
+      name = 'dne';
+  }
+
+  // Make sure it exists in the font
+  if (!font[name]) {
+    return 'dne';
+  } else {
+    return name;
   }
 }
