@@ -13,7 +13,7 @@ module.exports = function(string, options) {
   }, options);
   // Set spacer to font's default
   if (!options['spacer']) {
-    options['spacer'] = fonts[options['font']].spacer;
+    options['spacer'] = fonts[options['font']].settings.spacer;
   }
 
   // Check if language is valid
@@ -27,7 +27,7 @@ module.exports = function(string, options) {
   string.split(options['lineBreak']).forEach(function(fragment) {
     // Append the same amount of arrays as the font height
     output = [];
-    for (let i = 0; i < fonts[options['font']].height; i++, output.push([""]));
+    for (let i = 0; i < fonts[options['font']].settings.height; i++, output.push([""]));
 
     for (i = 0, letter = fragment[i]; i < fragment.length; i++, letter = fragment[i]) {
       letter = translate(letter, fonts[options['font']]);
@@ -47,9 +47,11 @@ module.exports = function(string, options) {
 // Check if a font is valid
 function valid(font) {
   // Each font needs a height, a spacer, a space field, and a dne field
-  if (!font.height) {
+  if (!font.settings) {
+    throw new TypeError('Font Error: Missing settings object');
+  } else if (!font.settings.height) {
     throw new TypeError('Font Error: Missing letter height');
-  } else if (!font.spacer && font.spacer !== "") {
+  } else if (!font.settings.spacer && font.settings.spacer !== "") {
     throw new TypeError('Font Error: Missing letter spacer');
   } else if (!font['space']) {
     throw new TypeError('Font Error: Missing `space` field');
@@ -58,12 +60,12 @@ function valid(font) {
   }
 
   // Check that every letter has the same height and is an array
-  if (font.height === 0) {
+  if (font.settings.height === 0) {
     return true;
   } else {
-    let letterHeight = font.height;
+    let letterHeight = font.settings.height;
     for (line in font) {
-      if (line === 'height' || line === 'spacer');
+      if (line === 'settings');
       else {
         if (font[line].length !== letterHeight) {
           throw new TypeError('Font Error: Letters don\'t have the same listed height');

@@ -1,4 +1,3 @@
-// Letters are mostly 4 x 7
 module.exports = {
   a: [
     ""
@@ -81,5 +80,8 @@ module.exports = {
     ""
   ]
 }
-module.exports.spacer = "";
-module.exports.height = 1;
+module.exports.settings = {
+  spacer: "",
+  height: 1,
+  author: ""
+}

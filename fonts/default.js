@@ -199,5 +199,8 @@ module.exports = {
     ""
   ]
 }
-module.exports.spacer = "";
-module.exports.height = 4;
+module.exports.settings = {
+  spacer: "",
+  height: 4,
+  author: "Drew Thoennes"
+}
