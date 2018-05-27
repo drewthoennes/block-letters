@@ -37,14 +37,14 @@ blockLetterGenerator('Multiline with#custom line#breaks', {lineBreak: '#'});
 |_,___/|_|\_\  \____/ \__,_||_| \_|/_____/
 */
 
-blockLetterGenerator('Infinite possibilities', {font: 'morse'});
-/*
-../-./..-./../-./../-/./ /.--./---/.../.../../-.../../.-../../-/.././...
-*/
-
 blockLetterGenerator('With custom spacers', {font: 'morse', spacer: '#'});
 /*
 .--#..#-#....# #-.-.#..-#...#-#---#--# #...#.--.#.-#-.-.#.#.-.#...
+*/
+
+blockLetterGenerator('Infinite possibilities', {font: 'morse'});
+/*
+../-./..-./../-./../-/./ /.--./---/.../.../../-.../../.-../../-/.././...
 */
 ```
 
